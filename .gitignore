@@ -1,0 +1,44 @@
+# Xcode
+.DS_Store
+build/
+DerivedData/
+
+# User settings (ローカル固有設定は共有しない)
+xcuserdata/
+*.xcuserstate
+
+# Workspace local settings (管理しない)
+*.xcworkspace/xcuserdata/
+*.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+*.xcworkspace/contents.xcworkspacedata
+
+# Swift Package Manager
+.build/
+Package.resolved  # プロジェクトルートの Package.resolved は管理可能
+*.xcworkspace/xcshareddata/swiftpm/Package.resolved
+*.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Scheme (共有したいものは残す)
+!xcshareddata/xcschemes/*.xcscheme
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# その他不要ファイル
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+

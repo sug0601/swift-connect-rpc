@@ -6,6 +6,29 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8DCD8B242E923931001805C9 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8DCD8B232E923931001805C9 /* ComposableArchitecture */; };
+		8DF7AA512E929BDC00F2050B /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 8DF7AA502E929BDC00F2050B /* SwiftProtobuf */; };
+		8DF7AA532E929BF700F2050B /* SwiftProtobufPluginLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 8DF7AA522E929BF700F2050B /* SwiftProtobufPluginLibrary */; };
+		8DF7AA5B2E92A1DB00F2050B /* Connect in Frameworks */ = {isa = PBXBuildFile; productRef = 8DF7AA5A2E92A1DB00F2050B /* Connect */; };
+		8DF7AA5D2E92A1DB00F2050B /* ConnectMocks in Frameworks */ = {isa = PBXBuildFile; productRef = 8DF7AA5C2E92A1DB00F2050B /* ConnectMocks */; };
+		8DF7AA5F2E92A1DB00F2050B /* ConnectNIO in Frameworks */ = {isa = PBXBuildFile; productRef = 8DF7AA5E2E92A1DB00F2050B /* ConnectNIO */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		8DF7AA582E929DAA00F2050B /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXContainerItemProxy section */
 		8DCD8B062E923665001805C9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +52,22 @@
 		8DCD8B0F2E923665001805C9 /* testUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8DF7AA612E92A84900F2050B /* Exceptions for "test" folder in "test" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8DCD8AF62E923664001805C9 /* test */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8DCD8AF92E923664001805C9 /* test */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8DF7AA612E92A84900F2050B /* Exceptions for "test" folder in "test" target */,
+			);
 			path = test;
 			sourceTree = "<group>";
 		};
@@ -52,6 +88,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DF7AA532E929BF700F2050B /* SwiftProtobufPluginLibrary in Frameworks */,
+				8DF7AA5F2E92A1DB00F2050B /* ConnectNIO in Frameworks */,
+				8DF7AA5D2E92A1DB00F2050B /* ConnectMocks in Frameworks */,
+				8DF7AA5B2E92A1DB00F2050B /* Connect in Frameworks */,
+				8DF7AA512E929BDC00F2050B /* SwiftProtobuf in Frameworks */,
+				8DCD8B242E923931001805C9 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +120,7 @@
 				8DCD8AF92E923664001805C9 /* test */,
 				8DCD8B082E923665001805C9 /* testTests */,
 				8DCD8B122E923665001805C9 /* testUITests */,
+				8DCD8B792E927274001805C9 /* Frameworks */,
 				8DCD8AF82E923664001805C9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,6 +135,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8DCD8B792E927274001805C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -104,6 +154,7 @@
 				8DCD8AF52E923664001805C9 /* Resources */,
 			);
 			buildRules = (
+				8DF7AA582E929DAA00F2050B /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -112,6 +163,12 @@
 			);
 			name = test;
 			packageProductDependencies = (
+				8DCD8B232E923931001805C9 /* ComposableArchitecture */,
+				8DF7AA502E929BDC00F2050B /* SwiftProtobuf */,
+				8DF7AA522E929BF700F2050B /* SwiftProtobufPluginLibrary */,
+				8DF7AA5A2E92A1DB00F2050B /* Connect */,
+				8DF7AA5C2E92A1DB00F2050B /* ConnectMocks */,
+				8DF7AA5E2E92A1DB00F2050B /* ConnectNIO */,
 			);
 			productName = test;
 			productReference = 8DCD8AF72E923664001805C9 /* test.app */;
@@ -195,6 +252,11 @@
 			);
 			mainGroup = 8DCD8AEE2E923664001805C9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8DCD8B222E92390F001805C9 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				8DF7AA4F2E929BDC00F2050B /* XCRemoteSwiftPackageReference "swift-protobuf" */,
+				8DF7AA592E92A1DB00F2050B /* XCRemoteSwiftPackageReference "connect-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8DCD8AF82E923664001805C9 /* Products */;
 			projectDirPath = "";
@@ -393,6 +455,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = test/Info.plist;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "ローカルネットワーク上のサーバーに接続してデータを取得します。";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -430,6 +494,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = test/Info.plist;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "ローカルネットワーク上のサーバーに接続してデータを取得します。";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -583,6 +649,66 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8DCD8B222E92390F001805C9 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.22.3;
+			};
+		};
+		8DF7AA4F2E929BDC00F2050B /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.26.0;
+			};
+		};
+		8DF7AA592E92A1DB00F2050B /* XCRemoteSwiftPackageReference "connect-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bufbuild/connect-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8DCD8B232E923931001805C9 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DCD8B222E92390F001805C9 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		8DF7AA502E929BDC00F2050B /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DF7AA4F2E929BDC00F2050B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		8DF7AA522E929BF700F2050B /* SwiftProtobufPluginLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DF7AA4F2E929BDC00F2050B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobufPluginLibrary;
+		};
+		8DF7AA5A2E92A1DB00F2050B /* Connect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DF7AA592E92A1DB00F2050B /* XCRemoteSwiftPackageReference "connect-swift" */;
+			productName = Connect;
+		};
+		8DF7AA5C2E92A1DB00F2050B /* ConnectMocks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DF7AA592E92A1DB00F2050B /* XCRemoteSwiftPackageReference "connect-swift" */;
+			productName = ConnectMocks;
+		};
+		8DF7AA5E2E92A1DB00F2050B /* ConnectNIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DF7AA592E92A1DB00F2050B /* XCRemoteSwiftPackageReference "connect-swift" */;
+			productName = ConnectNIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8DCD8AEF2E923664001805C9 /* Project object */;
 }
