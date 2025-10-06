@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: - Article List View
+
 struct ArticleListView: View {
     @State private var store = ArticleStore()
 
@@ -14,7 +16,7 @@ struct ArticleListView: View {
                             .padding()
                         Button("再試行") {
                             Task {
-                                await store.listArticles()
+                                await store.refresh()
                             }
                         }
                         .buttonStyle(.bordered)
@@ -22,7 +24,9 @@ struct ArticleListView: View {
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 16) {
-                            ForEach(store.articles, id: \.id) { article in
+                            ForEach(store.articles.indices, id: \.self) { index in
+                                let article = store.articles[index]
+
                                 NavigationLink(destination: ArticleDetailView(articleID: article.id)) {
                                     VStack(alignment: .leading, spacing: 8) {
                                         AsyncImage(url: URL(string: article.thumbnail)) { image in
@@ -37,28 +41,42 @@ struct ArticleListView: View {
                                         }
                                         .frame(height: 180)
                                         .frame(maxWidth: .infinity)
-                                        .clipped() // 画像自体は角丸なし
+                                        .clipped()
 
                                         Text(article.title)
                                             .font(.headline)
                                             .foregroundColor(.primary)
                                             .lineLimit(2)
-                                            .padding(.horizontal, 8)
-                                            .padding(.bottom, 8)
+                                            .padding([.horizontal, .bottom], 8)
                                     }
                                     .background(Color(UIColor.systemBackground))
-                                    .cornerRadius(12) // カード全体の角丸
+                                    .cornerRadius(12)
                                     .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
                                     .padding(.horizontal)
                                 }
-                                .buttonStyle(PlainButtonStyle()) // 右矢印非表示
+                                .buttonStyle(PlainButtonStyle())
+                                .onAppear {
+                                    Task {
+                                        // 最後の要素が出現したら追加読み込み
+                                        if index == store.articles.count - 1 {
+                                            await store.loadMoreIfNeeded()
+                                        }
+                                    }
+                                }
+                            }
+
+                            if store.hasMorePages && store.isLoadingMore {
+                                ProgressView()
+                                    .padding()
                             }
                         }
                         .padding(.top)
+                        .padding(.bottom, 50)
                     }
                 }
 
-                if store.isLoading {
+                // 初回ロード中
+                if store.isLoading && store.articles.isEmpty {
                     ProgressView("読み込み中...")
                         .padding()
                         .background(.background)

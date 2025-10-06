@@ -9,7 +9,6 @@ import Connect
 import Foundation
 import SwiftProtobuf
 
-/// サービス
 internal protocol Example_V1_ArticleServiceClientInterface: Sendable {
 
     @available(iOS 13, *)

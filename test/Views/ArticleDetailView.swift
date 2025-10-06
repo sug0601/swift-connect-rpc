@@ -15,7 +15,7 @@ struct ArticleDetailView: View {
         self.articleID = articleID
         let protocolClient = ProtocolClient(
             httpClient: URLSessionHTTPClient(),
-            config: ProtocolClientConfig(host: "http://192.168.10.226:8080")
+            config: ProtocolClientConfig(host: "http://192.168.68.119:8080")
         )
         self.client = Example_V1_ArticleServiceClient(client: protocolClient)
     }
