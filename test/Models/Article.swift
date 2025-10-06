@@ -6,7 +6,6 @@ struct Article: Identifiable, Codable, Hashable {
     let thumbnail: String
     let content: String
 
-    // JSON に id が含まれない場合、自動生成
     init(id: UUID = UUID(), title: String, thumbnail: String, content: String) {
         self.id = id
         self.title = title
