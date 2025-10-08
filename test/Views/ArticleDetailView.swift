@@ -73,7 +73,6 @@ struct ArticleDetailView: View {
                     .shadow(radius: 10)
             }
         }
-        .navigationTitle("記事詳細")
         .task {
             await loadArticle()
         }

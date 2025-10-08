@@ -2,15 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>現在地を地図に表示するために位置情報を使用します。</string>
+
     <key>NSLocalNetworkUsageDescription</key>
     <string>ローカルネットワーク上のサーバーに接続してデータを取得します。</string>
     
     <key>NSAppTransportSecurity</key>
     <dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <true/>
-      <key>NSAllowsLocalNetworking</key>
-      <true/>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+        <key>NSAllowsLocalNetworking</key>
+        <true/>
     </dict>
 </dict>
 </plist>

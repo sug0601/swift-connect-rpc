@@ -5,23 +5,39 @@ import SwiftUI
 struct ArticleListView: View {
     @State private var store = ArticleStore()
     @State private var likedArticles: Set<String> = []
+    
+    // フィルターの状態を管理するState変数
+    @State private var showOnlyLiked = false
+    @State private var sortByRanking = false
+
+    // フィルターと並べ替えを適用する算出プロパティ
+    private var processedArticles: [Example_V1_ArticleSummary] {
+        var articlesToDisplay = store.articles
+        
+        if showOnlyLiked {
+            articlesToDisplay = articlesToDisplay.filter { likedArticles.contains($0.id) }
+        }
+        
+        if sortByRanking {
+//            articlesToDisplay.sort { $0.viewCount > $1.viewCount }
+        }
+        
+        return articlesToDisplay
+    }
 
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(store.articles.indices, id: \.self) { index in
-                        let article = store.articles[index]
+                    ForEach(processedArticles, id: \.id) { article in
                         ArticleCardView(
                             article: article,
                             isLiked: likedArticles.contains(article.id),
-                            onLike: {
-                                toggleLike(article.id)
-                            }
+                            onLike: { toggleLike(article.id) }
                         )
                         .onAppear {
                             Task {
-                                if index == store.articles.count - 1 {
+                                if !showOnlyLiked, let lastArticle = store.articles.last, lastArticle.id == article.id {
                                     await store.loadMoreIfNeeded()
                                 }
                             }
@@ -33,11 +49,24 @@ struct ArticleListView: View {
                     }
                 }
                 .padding(.top)
-                .padding(.bottom, 50)
             }
-            .navigationTitle("Building Spot")
             .task {
                 await store.listArticles()
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    // ランキング表示切り替えトグル
+                    Toggle(isOn: $sortByRanking) {
+                        Image(systemName: "chart.bar.xaxis")
+                    }
+                    .tint(.blue)
+                    
+                    // お気に入り表示切り替えトグル
+                    Toggle(isOn: $showOnlyLiked) {
+                        Image(systemName: showOnlyLiked ? "heart.fill" : "heart")
+                    }
+                    .tint(.red)
+                }
             }
         }
     }
@@ -62,20 +91,16 @@ struct ArticleCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            NavigationLink(destination: ArticleDetailView(articleID: article.id)) {
+            NavigationLink(destination: ArticleDetailView(articleID: article.id)) { // ArticleDetailViewは別途定義が必要
                 VStack(alignment: .leading, spacing: 8) {
                     AsyncImage(url: URL(string: article.thumbnail)) { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
+                        image.resizable().scaledToFill()
                     } placeholder: {
                         ProgressView()
-                            .frame(height: 180)
-                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: .infinity, minHeight: 180)
                             .background(Color.gray.opacity(0.2))
                     }
                     .frame(height: 180)
-                    .frame(maxWidth: .infinity)
                     .clipped()
 
                     Text(article.title)
@@ -83,37 +108,33 @@ struct ArticleCardView: View {
                         .foregroundColor(.primary)
                         .lineLimit(2)
                         .padding(.horizontal, 8)
-                        .padding(.bottom, 8)
                 }
-                .contentShape(Rectangle())
             }
-            .buttonStyle(PlainButtonStyle())
+            .buttonStyle(.plain)
 
-            HStack(alignment: .bottom, spacing: 12) {
+            HStack(spacing: 12) {
+                Image(systemName: "eye")
+//                Text("\(article.viewCount)")
+                
                 Spacer()
 
-                // ❤️ ハート
                 Button(action: onLike) {
                     Image(systemName: isLiked ? "heart.fill" : "heart")
                         .foregroundColor(isLiked ? .red : .gray)
-                        .font(.system(size: 20))
                 }
 
-                // 📤 共有ボタン
                 ShareLink(item: article.title) {
                     Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 20))
                 }
             }
-            .padding(.trailing, 16) // 右側に16ポイントの余白を追加
-            .padding(.bottom, 8)
-
-
+            .font(.callout)
+            .foregroundColor(.secondary)
+            .padding([.horizontal, .bottom], 12)
         }
-        .background(Color(UIColor.systemBackground))
+        .background(Color(.systemBackground))
         .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+        .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
         .padding(.horizontal)
     }
 }
+
